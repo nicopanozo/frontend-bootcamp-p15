@@ -17,7 +17,6 @@ const sampleMessages = [
 const sampleAuthors = ["Alice", "Bob", "Charlie", "Diana", "Eve"];
 
 export const startMessageSimulation = () => {
-
   const simulatePresenceChange = () => {
     const randomAuthor =
       sampleAuthors[Math.floor(Math.random() * sampleAuthors.length)];

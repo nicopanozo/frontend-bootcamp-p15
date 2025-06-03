@@ -63,13 +63,13 @@ const chatSlice = createSlice({
   reducers: {
     selectThread: (state, action: PayloadAction<string>) => {
       state.selectedThreadId = action.payload;
-      // Mark all messages in the selected thread as read
+
       if (state.messages[action.payload]) {
         state.messages[action.payload].forEach((message) => {
           message.read = true;
         });
       }
-      // Reset unread count for the selected thread
+
       const thread = state.threads.find((t) => t.id === action.payload);
       if (thread) {
         thread.unreadCount = 0;
@@ -91,7 +91,7 @@ const chatSlice = createSlice({
         author,
         content,
         timestamp: Date.now(),
-        read: true, // Messages sent by the user are automatically read
+        read: true,
       };
 
       if (!state.messages[threadId]) {
@@ -115,7 +115,7 @@ const chatSlice = createSlice({
         author,
         content,
         timestamp: Date.now(),
-        read: state.selectedThreadId === threadId, // Only read if the thread is currently selected
+        read: state.selectedThreadId === threadId,
       };
 
       if (!state.messages[threadId]) {
@@ -123,7 +123,6 @@ const chatSlice = createSlice({
       }
       state.messages[threadId].push(newMessage);
 
-      // Increment unread count if the thread is not currently selected
       if (state.selectedThreadId !== threadId) {
         const thread = state.threads.find((t) => t.id === threadId);
         if (thread) {
@@ -156,7 +155,7 @@ const chatSlice = createSlice({
         );
         if (message) {
           message.content = content;
-          message.timestamp = Date.now(); // Update timestamp for edited message
+          message.timestamp = Date.now();
           break;
         }
       }
